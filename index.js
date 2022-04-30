@@ -1,6 +1,21 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
+// Imports
+const Employee = require('./employees/employee');
+const teamManager = require('./employees/TeamManager');
+const Engineer = require('./employees/engineer');
+const Intern = require('./employees/intern');
+
+// Template Literals
+const teamManagerCard = require('./templates/teamManagerCard');
+const EngineerCard = require('./templates/EngineerCard');
+const internCard = require('./templates/internCard');
+
+// Team Array 
+const team = [];
+
+
 inquirer
     .prompt([
         {
