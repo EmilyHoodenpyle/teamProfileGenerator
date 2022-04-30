@@ -8,64 +8,60 @@ const Engineer = require('./employees/engineer');
 const Intern = require('./employees/intern');
 
 // Template Literals
-const teamManagerCard = require('./templates/teamManagerCard');
+const teamManagerCard = require('./templates/teamManagerCard.js');
 const EngineerCard = require('./templates/EngineerCard');
 const internCard = require('./templates/internCard');
 
 // Team Array 
 const team = [];
 
+function buildTeam(){
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is the Team Manager's name?",
+                name: "managerName"
+            },
+            {
+                type: "input",
+                message: "What is their Employee ID?",
+                name: "employeeID"
+            },
+            {
+                type: "input",
+                message: "What is their Email Address?",
+                name: "employeeEmail"
+            },
+            {
+                type: "input",
+                message: "What is their Office Number?",
+                name: "employeeOfficeNumber"
+            },
+            {
+                type: "list",
+                message: "Would you like to add a Team Member, or have you completed your Team?",
+                name: "contBuildTeam",
+                choices: ["Add Engineer", "Add Intern","Complete Team"]
+            },
+        ])
 
-inquirer
-    .prompt([
-        {
-            
-        },
-    ])
-    .then((response) => {
-        var d = JSON.stringify(response)
-        var htmlText =
-            `<!DOCTYPE html>
-            <html lang="en"> 
-            <head> 
-            <meta charset="UTF-8" /> 
-            <title>Team Profile Generator</title> 
-            <link rel="stylesheet" href="./assets/css/jass.css" /> 
-            <link rel="stylesheet" href="./assets/css/style.css" /> 
-            </head> 
-            <body> 
-            <header>Team Profile Generator</header>
-            // TEAM LEADER
-            <div class='card'>
-            <div class='card-header'>${data.name}</div>
-            <div class='card-body'>
-            <p>Employee ID Number: ${data.id}</p>
-            <p>Email: ${data.email}</p>
-            <p>Office Number: <a href='mailto:${data.email}'>${data.email}</a></p>
-            </div>
-            </div>
-            // ENGINEER
-            <div class='card'>
-            <div class='card-header'>${data.name}</div>
-            <div class='card-body'>
-            <p>Employee ID Number: ${data.id}</p>
-            <p>Email: <a href='mailto:${data.email}'>${data.email}</a></p>
-            <p>GitHub: <a href='https://github.com/${data.gitHub}'>${data.gitHub}</a></p>
-            </div>
-            </div>
-            // INTERN
-            <div class='card'>
-            <div class='card-header'>${data.name}</div>
-            <div class='card-body'>
-            <p>Employee ID Number: ${data.id}</p>
-            <p>Email: <a href='mailto:${data.email}'>${data.email}</a></p>
-            <p>School: ${data.school}</p>
-            </div>
-            </div>
-            </body>
-            </html>`
-        fs.writeFile('teamProfile.html', htmlText, (err) =>
-        err ? console.error(err) : console.log('Success!')
-        )
+        .then(function(answers) {
+            const intern = new Intern(answers.internName, answers.employeeID, answers.employeeEmail, answers.schoolName);
+            team.push(intern);
+
+            if (answers.contBuildTeam == "Add Engineer") {
+                buildEngineer();
+            } else if(answers.contBuildTeam == "Add Intern") {
+                buildIntern();
+            } else if(answers.contBuildTeam == "Complete Team") {
+                renderHTML();
+            }
+        })
+
+        function renderHTML() {
+            const teamContent = team.map(items => items(manger));
+            console.log(teamContent);
+            fs.writeFile('teamProfileGenerator', teamContent, (err) => err ? console.log(err) : console.log('Successfully created teamProfileGenerator.html!'));
+        }
     }
-    );
