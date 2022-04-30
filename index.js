@@ -19,6 +19,34 @@ inquirer
             <link rel="stylesheet" href="./assets/css/style.css" /> 
             </head> 
             <body> 
+            <header>Team Profile Generator</header>
+            // TEAM LEADER
+            <div class='card'>
+            <div class='card-header'>${data.name}</div>
+            <div class='card-body'>
+            <p>Employee ID Number: ${data.id}</p>
+            <p>Email: ${data.email}</p>
+            <p>Office Number: <a href='mailto:${data.email}'>${data.email}</a></p>
+            </div>
+            </div>
+            // ENGINEER
+            <div class='card'>
+            <div class='card-header'>${data.name}</div>
+            <div class='card-body'>
+            <p>Employee ID Number: ${data.id}</p>
+            <p>Email: <a href='mailto:${data.email}'>${data.email}</a></p>
+            <p>GitHub: <a href='https://github.com/${data.gitHub}'>${data.gitHub}</a></p>
+            </div>
+            </div>
+            // INTERN
+            <div class='card'>
+            <div class='card-header'>${data.name}</div>
+            <div class='card-body'>
+            <p>Employee ID Number: ${data.id}</p>
+            <p>Email: <a href='mailto:${data.email}'>${data.email}</a></p>
+            <p>School: ${data.school}</p>
+            </div>
+            </div>
             </body>
             </html>`
         fs.writeFile('teamProfile.html', htmlText, (err) =>
