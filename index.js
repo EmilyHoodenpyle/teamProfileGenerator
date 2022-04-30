@@ -21,7 +21,7 @@ inquirer
             <body> 
             </body>
             </html>`
-        fs.writeFile('userDisplay.html', htmlText, (err) =>
+        fs.writeFile('teamProfile.html', htmlText, (err) =>
         err ? console.error(err) : console.log('Success!')
         )
     }
