@@ -10,7 +10,7 @@ function generateHTML(data) {
             </head> 
             <body> 
             <header>Team Profile Generator</header> 
-            <div class=""> // PUT CARDS HERE </div>
+            <div class="cards"> // PUT CARDS HERE </div>
             </body>
             </html>
     `

@@ -11,6 +11,7 @@ const Intern = require('./employees/intern');
 const teamManagerCard = require('./templates/teamManagerCard.js');
 const EngineerCard = require('./templates/EngineerCard');
 const internCard = require('./templates/internCard');
+const generateHTML = require('./templates/generateHTML');
 
 // Team Array 
 const team = [];
@@ -60,8 +61,7 @@ function buildTeam(){
         })
 
         function renderHTML() {
-            const teamContent = team.map(items => items(manger));
-            console.log(teamContent);
-            fs.writeFile('teamProfileGenerator', teamContent, (err) => err ? console.log(err) : console.log('Successfully created teamProfileGenerator.html!'));
+            const teamProfileGenerator = generateHTML(data);
+            fs.writeFile('teamProfileGenerator', teamProfileGenerator, (err) => err ? console.log(err) : console.log('Successfully created teamProfileGenerator.html!'));
         }
     }
