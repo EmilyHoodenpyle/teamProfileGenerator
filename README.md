@@ -2,7 +2,7 @@
 
 ## Description
 
-
+This is a Team Profile Generator. If working correctly, the user should enter their teams information into the application, and the information should be entered into an HTML document, which displays the information.
 
 ## Table of Contents
 - [Installation](#installation)
